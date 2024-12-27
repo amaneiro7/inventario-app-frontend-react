@@ -1,8 +1,7 @@
 import { lazy, Suspense, useMemo } from "react"
 import { Outlet, useLocation } from "react-router-dom"
+import Loading from "@/sections/components/Loading"
 
-
-const Main = lazy(async () => import("@/sections/components/Main"))
 const PageTitle = lazy(async () => import("@/sections/components/Typography/PageTitle"))
 const DetailsWrapper = lazy(async () => import("@/sections/components/DetailsWrapper/DetailsWrapper").then(m => ({ default: m.DetailsWrapper })))
 const DetailsBoxWrapper = lazy(async () => import("@/sections/components/DetailsWrapper/DetailsBoxWrapper"))
@@ -37,15 +36,14 @@ export default function UserManagement() {
       return ''
     }, [pageIs])
     return (
-      <Suspense>
-        <Main content='max' overflow={false} className='pr-8'>
+      <Suspense fallback={<Loading />}>
           <PageTitle title='Gestión de usuarios' />
           <DetailsWrapper borderColor='blue'>
             <DetailsBoxWrapper>
               <Subtitle variant='h3' color='blue' text={`Gestión de usuarios ${subtitle}`} />
               <p className='inline-flex gap-1 text-center justify-center items-center '>
                 <Paragraph color='gray' variant='span' text={`Ingrese el correo del usuario que desea visualizar, editar, restablecer contraseña o eliminar${desc}.`} />
-                {pageIs !== 'register' ? <Paragraph color='white' variant='span' text='Agregar nuevo' backgroundColor='orange' icon={<AddIcon width={16} />} /> : null}
+                {pageIs !== 'register' ? <Suspense><Paragraph color='white' variant='span' text='Agregar nuevo' backgroundColor='orange' icon={<AddIcon width={16} />} /></Suspense> : null}
               </p>
               <SearchSection
                 key={location.key}
@@ -53,16 +51,15 @@ export default function UserManagement() {
                 url='/user-management/register'
                 isEdit={pageIs !== 'register'}
               />
-            </DetailsBoxWrapper>          
+            </DetailsBoxWrapper>
             <Outlet />          
           </DetailsWrapper>
           {pageIs ? 
             <StepsToFollow>
-              {(pageIs === 'register' || pageIs === 'edit') ? <RegisterEditStepsToFollow /> : null}
-              {(pageIs === 'profile') ? <ProfileStepsToFollow /> : null}
+              {(pageIs === 'register' || pageIs === 'edit') ? <Suspense><RegisterEditStepsToFollow /></Suspense>: null}
+              {(pageIs === 'profile') ? <Suspense><ProfileStepsToFollow /></Suspense> : null}
             </StepsToFollow> 
-          : null}
-        </Main>
+          : null} 
       </Suspense>
     )
 }

@@ -18,9 +18,9 @@ export class ApiAuthRepository implements AuthRepository {
 
   async checkToken(): Promise<UserPrimitives & { accessToken: string } | null> {
     const localToken = localStorage.getItem('user')
-
     if (localToken) {
-      if (!this.isTokenExpired(JSON.parse(localToken).accessToken)) {
+      console.log('localToken', localToken)
+      if (!this.isTokenExpired(JSON.parse(localToken)?.accessToken)) {
         console.info('Token no ha expirado')
         return JSON.parse(localToken)
       }

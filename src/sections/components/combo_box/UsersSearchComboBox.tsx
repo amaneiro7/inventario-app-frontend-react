@@ -8,7 +8,6 @@ import { Autocomplete } from '../../mui/Autocomplete'
 import { type SearchByCriteriaQuery } from '../../../modules/shared/infraestructure/criteria/SearchByCriteriaQuery'
 import { Operator } from '../../../modules/shared/domain/criteria/FilterOperators'
 import { useSearchUsers } from '../../Hooks/user/useSearchUsers'
-import { InputSkeletonLoading } from '../skeleton/inputSkeletonLoading'
 
 const TextField = lazy(async () => await import("../../mui/TextField").then(m => ({ default: m.TextField })))
 const CircularProgress = lazy(async () => await import('../../mui/CircularProgress').then(m => ({ default: m.CircularProgress })))
@@ -22,7 +21,6 @@ export const UsersSearchComboBox = () => {
     const [value, setValue] = useState(null)
     const [inputValue, setInputValue] = useState('')
     const [options, setOptions] = useState([])
-    const [open, setOpen] = useState(false)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const searchApi = useCallback(
@@ -39,7 +37,6 @@ export const UsersSearchComboBox = () => {
     return (
       <div className='md:max-w-xl lg:max-w-2xl w-full flex justify-center items-center'>
         <p className='text-black/75 mr-2'>Buscar: </p>
-        <Suspense fallback={<InputSkeletonLoading />}>
           <Autocomplete
             key={location.key}
             id='combobox-search-users'
@@ -62,10 +59,7 @@ export const UsersSearchComboBox = () => {
                         setValue(newValue)
                     }}
             onInputChange={handleSearch}
-            size='small'
-            open={open}
-            onOpen={() => { setOpen(true) }}
-            onClose={() => { setOpen(false) }}
+            size='small'            
             isOptionEqualToValue={(option, value) => option?.email === value.email}
             loading={loading}
             clearText='Limpiar'
@@ -86,7 +80,7 @@ export const UsersSearchComboBox = () => {
                                 ...params.InputProps,
                                 endAdornment: (
                                   <>
-                                    {loading && <CircularProgress color='inherit' size={20} />}
+                                    {loading && <Suspense><CircularProgress color='inherit' size={20} /></Suspense>}
                                     {params.InputProps.endAdornment}
                                   </>
                                 ),
@@ -124,7 +118,6 @@ export const UsersSearchComboBox = () => {
                         )
                     }}
           />
-        </Suspense>
         <SearchLink 
           state={{state: value}}
           isDisabled={!value}          
