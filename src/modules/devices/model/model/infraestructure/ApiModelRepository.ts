@@ -1,6 +1,7 @@
-import { Criteria } from '../../../../shared/domain/criteria/Criteria'
+import { makeDownloadRequest, makeRequest } from '../../../../shared/infraestructure/fetching'
+import { type Criteria } from '../../../../shared/domain/criteria/Criteria'
+import { type Source } from '@/modules/shared/domain/types/types'
 import { type ModelApiresponse } from '../../../../shared/domain/types/responseTypes'
-import { makeRequest } from '../../../../shared/infraestructure/fetching'
 import { type ModelPrimitives, type Model } from '../domain/Model'
 import { type ModelId } from '../domain/ModelId'
 import { type ModelRepository } from '../domain/ModelRepository'
@@ -30,36 +31,13 @@ export class ApiModelRepository implements ModelRepository {
     return await makeRequest({ method: 'GET', url: `${this.url}/${id.value}` })
   }
 
-  async download(criteria: Criteria): Promise<void> {
-    const now = new Date()
-    const filename = `Reporte-Inventario${now.toLocaleString().replace(/[/:]/g, '-')}.xlsx`
+  async download(criteria: Criteria, source: Source): Promise<void> {
     const criteriaPrimitives = criteria.toPrimitives()
     const queryParams = criteria.buildQuery(criteriaPrimitives)
-    return await fetch(`http://localhost:5000/api/v1/models/download?${queryParams}`, {
+    return await makeDownloadRequest({
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/vnc.ms-excel'
-      },
-      credentials: 'include'
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.blob() // convert the response to a blob
-        }
-        throw new Error('Network response was not ok')
-      })
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = filename
-        document.body.appendChild(a)
-        a.click()
-        a.remove()
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation: ', error)
-      })
+      url: `${this.url}/download?${queryParams}`,
+    }, source)
   }
 
 }

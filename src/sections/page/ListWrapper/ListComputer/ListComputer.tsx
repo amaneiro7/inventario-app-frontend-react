@@ -22,6 +22,7 @@ export default function ListComputer() {
         total={managePage.showingMessage}
         title='Lista de equipos de computación'
         url='/device/add'
+        source="computer"
         loading={loading}
         handleChange={handleChange}
         handleClear={handleClear}

@@ -1,14 +1,12 @@
 import { useCallback, useState } from 'react'
 import { type SearchByCriteriaQuery } from '../../modules/shared/infraestructure/criteria/SearchByCriteriaQuery'
-import { OrderTypes } from '@/modules/shared/domain/criteria/OrderType'
+
 
 export const useSearchByCriteriaQuery = (defaultQuery?: SearchByCriteriaQuery) => {
   const [query, setQuery] = useState<SearchByCriteriaQuery>(defaultQuery ?? {
     filters: [],
     limit: 25,
     offset: 0,
-    orderBy: 'id',
-    orderType: OrderTypes.ASC
   })
 
 
@@ -83,8 +81,8 @@ export const useSearchByCriteriaQuery = (defaultQuery?: SearchByCriteriaQuery) =
       filters: defaultQuery?.filters ?? [],
       limit: defaultQuery?.limit ?? 25,
       offset: defaultQuery?.offset ?? 0,
-      orderBy: defaultQuery?.orderBy ?? 'id',
-      orderType: defaultQuery?.orderType ?? OrderTypes.ASC
+      orderBy: defaultQuery?.orderBy,
+      orderType: defaultQuery?.orderType
     }))
   }, [defaultQuery?.filters, defaultQuery?.limit, defaultQuery?.offset, defaultQuery?.orderBy, defaultQuery?.orderType])
 

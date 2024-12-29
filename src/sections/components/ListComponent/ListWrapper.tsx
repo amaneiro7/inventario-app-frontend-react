@@ -1,4 +1,4 @@
-import { lazy, useRef } from "react"
+import { lazy, Suspense, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { Operator } from "@/modules/shared/domain/criteria/FilterOperators"
 import { SpinnerSKCircle } from "../Loading/spinner-sk-circle"
@@ -8,6 +8,7 @@ import { type TypeOfSiteId } from "@/modules/location/typeofsites/domain/typeOfS
 import { type Primitives } from "@/modules/shared/domain/value-object/Primitives"
 import { type SearchByCriteriaQuery } from "@/modules/shared/infraestructure/criteria/SearchByCriteriaQuery"
 import { type useHandlePage } from "@/sections/Hooks/useHandlePage"
+import { type Source } from "@/modules/shared/domain/types/types"
 
 const PageTitle = lazy(async () => import('../Typography/PageTitle'))
 const DetailsWrapper = lazy(async () => import("../DetailsWrapper/DetailsWrapper").then(m => ({ default: m.DetailsWrapper })))
@@ -30,6 +31,7 @@ export function ListWrapper({
   mainFilter,
   otherFilter,
   table,
+  source,
   managePage
 }: {
   typeOfSiteId?: Primitives<TypeOfSiteId>
@@ -37,6 +39,7 @@ export function ListWrapper({
   url: string
   total: string
   loading: boolean
+  source: Source
   handleChange: (name: string, value: string, operator?: Operator) => void
   handleClear: () => void
   query: SearchByCriteriaQuery
@@ -47,7 +50,7 @@ export function ListWrapper({
 }) {
   const navigate = useNavigate()
   const filterContainerRef = useRef<FilterContainerRef>(null)
-  const { download, isDownloading } = useDownloadExcelFromServer({ query })
+  const { download, isDownloading } = useDownloadExcelFromServer({ query, source })
 
   const handleFilter = () => { filterContainerRef.current?.handleOpen() }
 
@@ -79,7 +82,7 @@ export function ListWrapper({
             // </Suspense>
             : null}
 
-          {loading && <SpinnerSKCircle />}
+          {loading && <Suspense><SpinnerSKCircle /></Suspense>}
           {table}
         </div>
         {!loading ? 

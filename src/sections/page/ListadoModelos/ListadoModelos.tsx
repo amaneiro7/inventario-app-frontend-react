@@ -22,11 +22,12 @@ export default function ListadoModelos() {
         query={query}
         total={managePage.showingMessage}
         managePage={managePage}
-        title='List de modelos'
+        title='Lista de modelos'
         url='/model/add'
         loading={loading}
         handleChange={handleChange}
         handleClear={handleClear}
+        source="model"
         mainFilter={
           <MainModelFilter
             handleChange={handleChange}

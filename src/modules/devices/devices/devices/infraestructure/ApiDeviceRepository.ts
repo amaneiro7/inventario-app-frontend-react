@@ -1,10 +1,10 @@
-import { API_URL } from '@/modules/shared/infraestructure/config'
+import { makeDownloadRequest, makeRequest } from '../../../../shared/infraestructure/fetching'
 import { type Criteria } from '../../../../shared/domain/criteria/Criteria'
 import { type DevicesApiResponse } from '../../../../shared/domain/types/responseTypes'
-import { makeRequest } from '../../../../shared/infraestructure/fetching'
 import { type DevicePrimitives, type Device } from '../domain/Device'
 import { type DeviceId } from '../domain/DeviceId'
 import { type DeviceRepository } from '../domain/DeviceRepository'
+import { type Source } from '@/modules/shared/domain/types/types'
 
 export class ApiDeviceRepository implements DeviceRepository {
   private readonly url: string = 'devices'
@@ -22,36 +22,13 @@ export class ApiDeviceRepository implements DeviceRepository {
     return await makeRequest<{ total: number, data: DevicesApiResponse[] }>({ method: 'GET', url: `${this.url}?${queryParams}` })
   }
 
-  async download(criteria: Criteria): Promise<void> {
-    const now = new Date()
-    const filename = `Reporte-Inventario${now.toLocaleString().replace(/[/:]/g, '-')}.xlsx`
+  async download(criteria: Criteria, source: Source): Promise<void> {
     const criteriaPrimitives = criteria.toPrimitives()
     const queryParams = criteria.buildQuery(criteriaPrimitives)
-    return await fetch(`http://${API_URL}devices/download?${queryParams}`, {
+    return await makeDownloadRequest({
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/vnc.ms-excel'
-      },
-      credentials: 'include'
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.blob() // convert the response to a blob
-        }
-        throw new Error('Network response was not ok')
-      })
-      .then(blob => {
-        const url = window.URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = filename
-        document.body.appendChild(a)
-        a.click()
-        a.remove()
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation: ', error)
-      })
+      url: `${this.url}/download?${queryParams}`,
+    }, source)
   }
 
   async getAll(): Promise<DevicePrimitives[]> {

@@ -24,6 +24,7 @@ export default function ListPartsAndPieces() {
         managePage={managePage}
         title='Lista de partes y piezas'
         url='/device/add'
+        source="parts"
         loading={loading}
         handleChange={handleChange}
         handleClear={handleClear}

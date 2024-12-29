@@ -1,4 +1,5 @@
-import { Criteria } from '../../../../shared/domain/criteria/Criteria'
+import { type Source } from '@/modules/shared/domain/types/types';
+import { type Criteria } from '@/modules/shared/domain/criteria/Criteria'
 import { type ModelPrimitives, type Model } from './Model'
 import { type ModelId } from './ModelId'
 
@@ -13,5 +14,5 @@ export abstract class ModelRepository {
 
   abstract getById({ id }: { id: ModelId }): Promise<ModelPrimitives | null>
 
-  abstract download(criteria: Criteria): Promise<void>
+  abstract download(criteria: Criteria, source: Source): Promise<void>
 }

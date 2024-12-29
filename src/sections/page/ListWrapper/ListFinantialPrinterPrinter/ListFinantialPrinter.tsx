@@ -22,6 +22,7 @@ export default function ListFinantialPrinter() {
           total={managePage.showingMessage}
           title='Lista de impresoras Financieras'
           url='/device/add'
+          source="finantialprinter"
           loading={loading}
           handleChange={handleChange}
           handleClear={handleClear}

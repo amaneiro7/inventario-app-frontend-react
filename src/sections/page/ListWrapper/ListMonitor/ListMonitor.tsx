@@ -25,6 +25,7 @@ export default function ListMonitor() {
         managePage={managePage}
         title='Lista de monitores'
         url='/device/add'
+        source="monitor"
         loading={loading}
         handleChange={handleChange}
         handleClear={handleClear}

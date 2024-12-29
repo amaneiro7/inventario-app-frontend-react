@@ -24,6 +24,7 @@ export default function ListPrinters() {
         managePage={managePage}
         title='Lista de impresoras'
         url='/device/add'
+        source="printer"
         loading={loading}
         handleChange={handleChange}
         handleClear={handleClear}
