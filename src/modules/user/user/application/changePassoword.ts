@@ -8,7 +8,7 @@ export interface ChangePasswordParams {
 }
 
 export class ChangePassword {
-    constructor(private readonly repository: UserRepository) { }
+    constructor(private readonly userRepository: UserRepository) { }
     async run({ password, newPassword, reTypePassword }: ChangePasswordParams): Promise<void> {
         if (newPassword !== reTypePassword) {
             throw new Error('Las contraseñas no coinciden')
@@ -18,6 +18,6 @@ export class ChangePassword {
             throw new Error('La nueva contraseña debe ser diferente a la actual')
         }
         const updatePassword = new UserPassword(newPassword).value
-        return await this.repository.changePassword({ password, newPassword: updatePassword, reTypePassword })
+        return await this.userRepository.changePassword({ password, newPassword: updatePassword, reTypePassword })
     }
 }
