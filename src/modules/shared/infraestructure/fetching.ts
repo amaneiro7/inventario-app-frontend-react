@@ -12,7 +12,7 @@ export const api: AxiosInstance = axios.create({
   }
 })
 
-export async function makeRequest<T>(config: AxiosRequestConfig & {
+export async function makeRequest<T> (config: AxiosRequestConfig & {
   _retry?: boolean
 }): Promise<T> {
   try {
@@ -51,13 +51,14 @@ export async function makeRequest<T>(config: AxiosRequestConfig & {
     throw new Error('Ha ocurrido un error. Por favor, inténtelo de nuevo más tarde')
   }
 }
-export async function makeDownloadRequest(config: AxiosRequestConfig & {
+export async function makeDownloadRequest (config: AxiosRequestConfig & {
   _retry?: boolean
 }, source: Source): Promise<void> {
   try {
     const response = await api({
-      ...config, headers: {
-        'Content-Type': 'application/vnc.ms-excel',
+      ...config,
+headers: {
+        'Content-Type': 'application/vnc.ms-excel'
       },
       responseType: 'blob'
     })

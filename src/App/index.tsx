@@ -9,26 +9,26 @@ const AppRoutes = lazy(async () => await import('../sections/Routes/routes.tsx')
 const ToasterComponent = lazy(async () => import('../sections/utils/toaster.tsx').then(m => ({ default: m.ToasterComponent })))
 
 function App() {
-  return (    
+  return (
     <ErrorBoundary>
       <BrowserRouter
         future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
       >
         <AuthContextProvider repository={apiRepository}>
           <Suspense fallback={<Loading />}>
             <AppRoutes />
-            
+
           </Suspense>
           <Suspense>
-            
+
             <ToasterComponent />
           </Suspense>
         </AuthContextProvider>
       </BrowserRouter>
-    </ErrorBoundary>    
+    </ErrorBoundary>
   )
 }
 

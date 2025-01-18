@@ -6,21 +6,21 @@ export class UserLastName {
 
   private static errors: string = ''
 
-  constructor(readonly value: string) {
+  constructor (readonly value: string) {
     if (!UserLastName.isValid(value)) {
       throw new Error(UserLastName.invalidMessage())
     }
   }
 
-  private static updateErrors(value: string): void {
+  private static updateErrors (value: string): void {
     UserLastName.errors = value
   }
 
-  static get errorsValue(): string {
+  static get errorsValue (): string {
     return UserLastName.errors
   }
 
-  public static isValid(value: string): boolean {
+  public static isValid (value: string): boolean {
     const errors: string[] = []
     if (value.length < UserLastName.NAME_MIN_LENGTH) {
       errors.push(`El apellido del usuario debe ser mayor a ${UserLastName.NAME_MIN_LENGTH} caracteres`)
@@ -30,7 +30,7 @@ export class UserLastName {
     }
 
     if (!UserLastName.Regex.test(value)) {
-      errors.push(`La primera letra debe ser en mayúsculas, el resto en minúsculas, y no puede tener espacios al final al menos que sea un nombre compuesto`)
+      errors.push('La primera letra debe ser en mayúsculas, el resto en minúsculas, y no puede tener espacios al final al menos que sea un nombre compuesto')
     }
 
     if (errors.length > 0) {
@@ -42,7 +42,7 @@ export class UserLastName {
     }
   }
 
-  public static invalidMessage(): string {
+  public static invalidMessage (): string {
     return UserLastName.errorsValue
   }
 }
