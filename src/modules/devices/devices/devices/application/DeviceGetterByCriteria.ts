@@ -12,23 +12,30 @@ import { type DevicePrimitives } from '../domain/Device'
 import { DeviceRepository } from '../domain/DeviceRepository'
 
 export class DeviceGetterByCriteria {
-  constructor(private readonly repository: DeviceRepository) { }
-  async get(query: SearchByCriteriaQuery): Promise<{
-    total: number
-    data: DevicePrimitives[]
-  }> {
-    const filters = query.filters.length > 0 && query.filters.map((filter) => {
-      return new Filter(
-        new FilterField(filter.field),
-        FilterOperator.fromValue(filter.operator),
-        new FilterValue(filter.value))
-    })
-    const order = Order.fromValues(query.orderBy, query.orderType)
-    const limit = new Limit(query.limit)
-    const offset = new Limit(query.offset)
-    const criteria = new Criteria(new Filters(filters), order, limit, offset)
+	constructor(private readonly repository: DeviceRepository) {}
+	async get(query: SearchByCriteriaQuery): Promise<{
+		total: number
+		data: DevicePrimitives[]
+	}> {
+		const filters =
+			query.filters.length > 0 &&
+			query.filters.map(filter => {
+				return new Filter(
+					new FilterField(filter.field),
+					FilterOperator.fromValue(filter.operator),
+					new FilterValue(filter.value)
+				)
+			})
+		const order = Order.fromValues(query.orderBy, query.orderType)
+		const limit = new Limit(query.limit)
+		const offset = new Limit(query.offset)
+		const criteria = new Criteria(
+			new Filters(filters),
+			order,
+			limit,
+			offset
+		)
 
-    return await this.repository.getByCriteria(criteria)
-
-  }
+		return await this.repository.getByCriteria(criteria)
+	}
 }

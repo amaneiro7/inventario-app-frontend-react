@@ -8,34 +8,41 @@ import { useCoordinacion } from '../../Hooks/area/useCoordinacion'
 const Select = lazy(async () => await import('./Select'))
 
 interface Props {
-  value: Primitives<CoordinacionId>
-  gerenciaId: Primitives<GerenciaId>
-  onChange: OnHandleChange
-  isRequired?: boolean
-  isForm?: boolean
+	value: Primitives<CoordinacionId>
+	gerenciaId: Primitives<GerenciaId>
+	onChange: OnHandleChange
+	isRequired?: boolean
+	isForm?: boolean
 }
 
-export default function CoordinacionSelect({ value, onChange, isRequired, gerenciaId }: Props) {
-  const { coordinacion } = useCoordinacion()
+export default function CoordinacionSelect({
+	value,
+	onChange,
+	isRequired,
+	gerenciaId
+}: Props) {
+	const { coordinacion } = useCoordinacion()
 
-  const coordinacionFiltered = coordinacion.filter((coordinacion) => coordinacion.gerenciaId === gerenciaId)
+	const coordinacionFiltered = coordinacion.filter(
+		coordinacion => coordinacion.gerenciaId === gerenciaId
+	)
 
-  return (
-    <Suspense>
-      <Select
-        label='coordinacion'
-        name='coordinacionId'
-        onChange={(event) => {
-          const { name, value } = event.target
-          onChange(name, value)
-        }}
-        options={coordinacionFiltered}
-        placeholder='-- Filtre por Coordinacion --'
-        isRequired={isRequired}
-        isHidden={false}
-        isDisabled={false}
-        value={value}
-      />
-    </Suspense>
-  )
+	return (
+		<Suspense>
+			<Select
+				label="coordinacion"
+				name="coordinacionId"
+				onChange={event => {
+					const { name, value } = event.target
+					onChange(name, value)
+				}}
+				options={coordinacionFiltered}
+				placeholder="-- Filtre por Coordinacion --"
+				isRequired={isRequired}
+				isHidden={false}
+				isDisabled={false}
+				value={value}
+			/>
+		</Suspense>
+	)
 }

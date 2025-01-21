@@ -15,67 +15,66 @@ import { type RegionId } from '../../../../modules/location/region/domain/Region
 import { type DeviceEmployee } from '../../../../modules/devices/devices/devices/domain/DeviceEmployee'
 
 export interface InputData {
-    categoryId: Primitives<CategoryId>
-    brandId: Primitives<BrandId>
-    statusId: Primitives<StatusId>
-    activo: Primitives<DeviceActivo>
-    serial: Primitives<DeviceSerial>
-    modelId: Primitives<ModelId>
-    employeeId: Primitives<DeviceEmployee>
-    locationId: Primitives<LocationId>
-    typeOfSiteId: Primitives<TypeOfSiteId>
-    cityId: Primitives<CityId>
-    stateId: Primitives<StateId>
-    regionId: Primitives<RegionId>
+	categoryId: Primitives<CategoryId>
+	brandId: Primitives<BrandId>
+	statusId: Primitives<StatusId>
+	activo: Primitives<DeviceActivo>
+	serial: Primitives<DeviceSerial>
+	modelId: Primitives<ModelId>
+	employeeId: Primitives<DeviceEmployee>
+	locationId: Primitives<LocationId>
+	typeOfSiteId: Primitives<TypeOfSiteId>
+	cityId: Primitives<CityId>
+	stateId: Primitives<StateId>
+	regionId: Primitives<RegionId>
 }
 
 export const defaultInputData = {
-    categoryId: '',
-    brandId: '',
-    statusId: '',
-    activo: '',
-    serial: '',
-    modelId: '',
-    employeeId: '',
-    locationId: '',
-    typeOfSiteId: '',
-    cityId: '',
-    stateId: '',
-    regionId: '',
+	categoryId: '',
+	brandId: '',
+	statusId: '',
+	activo: '',
+	serial: '',
+	modelId: '',
+	employeeId: '',
+	locationId: '',
+	typeOfSiteId: '',
+	cityId: '',
+	stateId: '',
+	regionId: ''
 }
 export function useDefaultInitialInputValue(): {
-    inputData: InputData,
-    defaultInputData: InputData
+	inputData: InputData
+	defaultInputData: InputData
 } {
+	const defaultInputData = useMemo(() => {
+		return {
+			categoryId: '',
+			brandId: '',
+			statusId: '',
+			activo: '',
+			serial: '',
+			modelId: '',
+			employeeId: '',
+			locationId: '',
+			typeOfSiteId: '',
+			cityId: '',
+			stateId: '',
+			regionId: '',
+			computerName: '',
+			operatingSystemId: '',
+			operatingSystemArqId: '',
+			processor: '',
+			ipAddress: ''
+		}
+	}, [])
 
-    const defaultInputData = useMemo(() => {
-        return {
-            categoryId: '',
-            brandId: '',
-            statusId: '',
-            activo: '',
-            serial: '',
-            modelId: '',
-            employeeId: '',
-            locationId: '',
-            typeOfSiteId: '',
-            cityId: '',
-            stateId: '',
-            regionId: '',
-            computerName: '',
-            operatingSystemId: '',
-            operatingSystemArqId: '',
-            processor: '',
-            ipAddress: '',
-        }
-    }, [])
+	const getValuesFromQueryParams = useMemo(() => {
+		return getValueFromQueryParams(defaultInputData)
+	}, [defaultInputData])
 
-    const getValuesFromQueryParams = useMemo(() => {
-        return getValueFromQueryParams(defaultInputData)
-    }, [defaultInputData])
-
-    return {
-        defaultInputData,
-        inputData: { ...defaultInputData, ...getValuesFromQueryParams }
-    }
+	return {
+		defaultInputData,
+		inputData: { ...defaultInputData, ...getValuesFromQueryParams }
+	}
 }

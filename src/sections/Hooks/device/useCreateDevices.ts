@@ -4,11 +4,13 @@ import { ApiDeviceRepository } from '../../../modules/devices/devices/devices/in
 import { type DevicePrimitives } from '../../../modules/devices/devices/devices/domain/Device'
 
 export const useCreateDevice = (): {
-    createDevice: (formData: DevicePrimitives) => Promise<void>
+	createDevice: (formData: DevicePrimitives) => Promise<void>
 } => {
-    return {
-        createDevice: useCallback(async (formData: DevicePrimitives) => {
-            return await new DeviceCreator(new ApiDeviceRepository()).create(formData)
-        }, [])
-    }
+	return {
+		createDevice: useCallback(async (formData: DevicePrimitives) => {
+			return await new DeviceCreator(new ApiDeviceRepository()).create(
+				formData
+			)
+		}, [])
+	}
 }

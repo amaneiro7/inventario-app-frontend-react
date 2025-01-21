@@ -1,7 +1,7 @@
-import { Primitives } from "../../../shared/domain/value-object/Primitives"
-import { TypeOfSiteId } from "./typeOfSiteId"
+import { Primitives } from '../../../shared/domain/value-object/Primitives'
+import { TypeOfSiteId } from './typeOfSiteId'
 
 export interface TypeOfSitePrimitives {
-  id: Primitives<TypeOfSiteId>
-  name: string
+	id: Primitives<TypeOfSiteId>
+	name: string
 }

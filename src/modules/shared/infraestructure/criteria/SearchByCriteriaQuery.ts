@@ -7,11 +7,11 @@ import { type Primitives } from '../../domain/value-object/Primitives'
 import { type Query } from './Query'
 
 export class SearchByCriteriaQuery implements Query {
-  constructor (
-    public filters?: FiltersPrimitives[],
-    public orderBy?: Primitives<OrderBy>,
-    public orderType?: Primitives<OrderType>,
-    public limit?: Primitives<Limit>,
-    public offset?: Primitives<Offset>
-  ) {}
+	constructor(
+		public filters?: FiltersPrimitives[],
+		public orderBy?: Primitives<OrderBy>,
+		public orderType?: Primitives<OrderType>,
+		public limit?: Primitives<Limit>,
+		public offset?: Primitives<Offset>
+	) {}
 }

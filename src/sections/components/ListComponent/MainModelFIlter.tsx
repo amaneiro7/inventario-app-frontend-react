@@ -11,40 +11,33 @@ const BrandComboBox = lazy(() => import('../combo_box/BrandComboBox'))
 const ModelComboBox = lazy(() => import('../combo_box/ModelComboBox'))
 
 export function MainModelFilter({
-    handleChange,
-    categoryId,
-    brandId,
-    id
+	handleChange,
+	categoryId,
+	brandId,
+	id
 }: {
-    handleChange: OnHandleChange
-    categoryId: Primitives<CategoryId>
-    brandId: Primitives<BrandId>
-    id: Primitives<ModelId>
-    
+	handleChange: OnHandleChange
+	categoryId: Primitives<CategoryId>
+	brandId: Primitives<BrandId>
+	id: Primitives<ModelId>
 }) {
-    return (
-      <>
-        <Suspense fallback={<InputSkeletonLoading />}>
-          <CategoryComboBox
-            value={categoryId}
-            onChange={handleChange}
-          />
-        </Suspense>
-        <Suspense fallback={<InputSkeletonLoading />}>
-          <BrandComboBox
-            value={brandId}
-            onChange={handleChange}
-          />
-        </Suspense>
-        <Suspense fallback={<InputSkeletonLoading />}>
-          <ModelComboBox
-            name='id'
-            value={id}
-            brandId={brandId}
-            categoryId={categoryId}
-            onChange={handleChange}
-          />
-        </Suspense>
-      </>
-    )
+	return (
+		<>
+			<Suspense fallback={<InputSkeletonLoading />}>
+				<CategoryComboBox value={categoryId} onChange={handleChange} />
+			</Suspense>
+			<Suspense fallback={<InputSkeletonLoading />}>
+				<BrandComboBox value={brandId} onChange={handleChange} />
+			</Suspense>
+			<Suspense fallback={<InputSkeletonLoading />}>
+				<ModelComboBox
+					name="id"
+					value={id}
+					brandId={brandId}
+					categoryId={categoryId}
+					onChange={handleChange}
+				/>
+			</Suspense>
+		</>
+	)
 }

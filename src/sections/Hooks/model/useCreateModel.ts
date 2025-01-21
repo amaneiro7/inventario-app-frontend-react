@@ -4,11 +4,13 @@ import { ModelCreator } from '../../../modules/devices/model/model/application/M
 import { ApiModelRepository } from '../../../modules/devices/model/model/infraestructure/ApiModelRepository'
 
 export const useCreateModel = (): {
-    createModel: (formData: ModelPrimitives) => Promise<void>
+	createModel: (formData: ModelPrimitives) => Promise<void>
 } => {
-    return {
-        createModel: useCallback(async (formData: ModelPrimitives) => {
-            return await new ModelCreator(new ApiModelRepository()).create(formData)
-        }, [])
-    }
+	return {
+		createModel: useCallback(async (formData: ModelPrimitives) => {
+			return await new ModelCreator(new ApiModelRepository()).create(
+				formData
+			)
+		}, [])
+	}
 }

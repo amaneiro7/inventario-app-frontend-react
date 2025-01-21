@@ -15,8 +15,8 @@
 // }
 
 // export const ModelTableRow = memo(({
-//   data: models, 
-//   style, 
+//   data: models,
+//   style,
 //   index,
 //   categorySelected: {
 //     isComputer,
@@ -27,12 +27,12 @@
 //   }
 // }: Props) => {
 //     return (
-//       <TableRow className='w-36' style={style} key={index}>        
+//       <TableRow className='w-36' style={style} key={index}>
 //         <TableCellEditDeleteIcon stateId={models[index].id} state={models[index]} url={`/model/edit/${models[index].id}`} />
 //         <TableCell style={{ width: '112px' }} size='w-28' value={models[index].category?.name} />
 //         <TableCell style={{ width: '112px' }} size='w-28' value={models[index].brand?.name} />
 //         <TableCell style={{ width: '240px' }} size='w-60' value={models[index].name} />
-      
+
 //         {!(isMonitor || isPrinter || isKeyboard) && <TableCell style={{ width: '128px' }} size='w-32' value={(models[index]?.modelComputer?.memoryRamType?.name || models[index]?.modelLaptop?.memoryRamType?.name) ?? 'N/A'} />}
 //         {!(isMonitor || isPrinter || isKeyboard) && <TableCell style={{ width: '144px' }} size='w-36' value={(models[index]?.modelComputer?.memoryRamSlotQuantity || models[index]?.modelLaptop?.memoryRamSlotQuantity) ?? 'N/A'} />}
 //         {!(isPrinter || isKeyboard) && <TableCell style={{ width: '128px' }} size='w-32' value={(models[index]?.modelComputer || models[index]?.modelLaptop || models[index]?.modelMonitor) ? (models[index]?.modelComputer?.hasVGA || models[index]?.modelLaptop?.hasVGA || models[index]?.modelMonitor?.hasVGA ? 'Si' : 'No') : 'N/A'} />}

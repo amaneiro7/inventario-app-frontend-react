@@ -4,41 +4,41 @@ import { AllHistoryGetter } from '../../../modules/history/application/AllHistor
 import { ApiHistoryRepository } from '../../../modules/history/infraestructure/ApiHistoryRepository'
 
 export interface UseHistory {
-    histories: HistoryPrimitives[]
-    loading: boolean
-    error: string | null
+	histories: HistoryPrimitives[]
+	loading: boolean
+	error: string | null
 }
 
 export const useHistory = (): UseHistory => {
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const [histories, setHistory] = useState<HistoryPrimitives[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [histories, setHistory] = useState<HistoryPrimitives[]>([])
 
-    const getHistory = useCallback(() => {
-        setLoading(true)
-        new AllHistoryGetter(new ApiHistoryRepository())
-            .get()
-            .then((res) => {
-                setHistory(res)
-                setLoading(false)
-            })
-            .catch((error) => {
-                setError(error)
-                setLoading(false)
-            })
-    }, [])
+	const getHistory = useCallback(() => {
+		setLoading(true)
+		new AllHistoryGetter(new ApiHistoryRepository())
+			.get()
+			.then(res => {
+				setHistory(res)
+				setLoading(false)
+			})
+			.catch(error => {
+				setError(error)
+				setLoading(false)
+			})
+	}, [])
 
-    useEffect(() => {
-        getHistory()
+	useEffect(() => {
+		getHistory()
 
-        return () => {
-            setHistory([])
-        }
-    }, [getHistory])
+		return () => {
+			setHistory([])
+		}
+	}, [getHistory])
 
-    return {
-        histories,
-        loading,
-        error
-    }
+	return {
+		histories,
+		loading,
+		error
+	}
 }

@@ -8,34 +8,43 @@ import { useVicepresidencia } from '../../Hooks/area/useVicepresidencia'
 const Select = lazy(async () => await import('./Select'))
 
 interface Props {
-  value: Primitives<VicepresidenciaId>
-  vicepresidenciaEjecutivaId: Primitives<VicepresidenciaEjecutivaId>
-  onChange: OnHandleChange
-  isRequired?: boolean
-  isForm?: boolean
+	value: Primitives<VicepresidenciaId>
+	vicepresidenciaEjecutivaId: Primitives<VicepresidenciaEjecutivaId>
+	onChange: OnHandleChange
+	isRequired?: boolean
+	isForm?: boolean
 }
 
-export default function VicepresidenciaSelect({ value, onChange, isRequired, vicepresidenciaEjecutivaId }: Props) {
-  const { vicepresidencia } = useVicepresidencia()
+export default function VicepresidenciaSelect({
+	value,
+	onChange,
+	isRequired,
+	vicepresidenciaEjecutivaId
+}: Props) {
+	const { vicepresidencia } = useVicepresidencia()
 
-  const vicepresidenciaFiltered = vicepresidencia.filter((vicepresidencia) => vicepresidencia.vicepresidenciaEjecutivaId === vicepresidenciaEjecutivaId)
+	const vicepresidenciaFiltered = vicepresidencia.filter(
+		vicepresidencia =>
+			vicepresidencia.vicepresidenciaEjecutivaId ===
+			vicepresidenciaEjecutivaId
+	)
 
-  return (
-    <Suspense>
-      <Select
-        label='vicepresidencia'
-        name='vicepresidenciaId'
-        onChange={(event) => {
-          const { name, value } = event.target
-          onChange(name, value)
-        }}
-        options={vicepresidenciaFiltered}
-        placeholder='-- Filtre por vicepresidencia --'
-        isRequired={isRequired}
-        isHidden={false}
-        isDisabled={false}
-        value={value}
-      />
-    </Suspense>
-  )
+	return (
+		<Suspense>
+			<Select
+				label="vicepresidencia"
+				name="vicepresidenciaId"
+				onChange={event => {
+					const { name, value } = event.target
+					onChange(name, value)
+				}}
+				options={vicepresidenciaFiltered}
+				placeholder="-- Filtre por vicepresidencia --"
+				isRequired={isRequired}
+				isHidden={false}
+				isDisabled={false}
+				value={value}
+			/>
+		</Suspense>
+	)
 }

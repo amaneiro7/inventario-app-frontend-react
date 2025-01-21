@@ -4,40 +4,42 @@ import { AllVicepresidenciaEjecutivaGetter } from '../../../modules/employee/are
 import { ApiVicepresidenciaEjecutivaRepository } from '../../../modules/employee/area/vicepresidenciaejecutiva/infraestructure/ApiVicepresidenciaEjecutivaRepository'
 
 export interface UseVicepresidenciaEjecutiva {
-  vicepresidenciaEjecutiva: VicepresidenciaEjecutivaPrimitives[]
-  loading: boolean
-  error: string | null
+	vicepresidenciaEjecutiva: VicepresidenciaEjecutivaPrimitives[]
+	loading: boolean
+	error: string | null
 }
 export const useVicepresidenciaEjecutiva = () => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState<VicepresidenciaEjecutivaPrimitives[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [data, setData] = useState<VicepresidenciaEjecutivaPrimitives[]>([])
 
-  const fetchData = useCallback(() => {
-    setLoading(true)
-    new AllVicepresidenciaEjecutivaGetter(new ApiVicepresidenciaEjecutivaRepository())
-      .get()
-      .then((res) => {
-        setData(res)
-        setLoading(false)
-      })
-      .catch((error) => {
-        setError(error)
-        setLoading(false)
-      })
-  }, [])
+	const fetchData = useCallback(() => {
+		setLoading(true)
+		new AllVicepresidenciaEjecutivaGetter(
+			new ApiVicepresidenciaEjecutivaRepository()
+		)
+			.get()
+			.then(res => {
+				setData(res)
+				setLoading(false)
+			})
+			.catch(error => {
+				setError(error)
+				setLoading(false)
+			})
+	}, [])
 
-  useEffect(() => {
-    fetchData()
+	useEffect(() => {
+		fetchData()
 
-    return () => {
-      setData([])
-    }
-  }, [fetchData])
+		return () => {
+			setData([])
+		}
+	}, [fetchData])
 
-  return {
-    vicepresidenciaEjecutiva: data,
-    loading,
-    error
-  }
+	return {
+		vicepresidenciaEjecutiva: data,
+		loading,
+		error
+	}
 }

@@ -3,44 +3,42 @@ import { ApiRegionRepository } from '../../../modules/location/region/infraestru
 import { RegionPrimitives } from '../../../modules/location/region/domain/region'
 import { AllRegionGetter } from '../../../modules/location/region/application/AllRegionGetter'
 
-
-
 export interface UseRegion {
-    regions: RegionPrimitives[]
-    loading: boolean
-    error: Error | null
+	regions: RegionPrimitives[]
+	loading: boolean
+	error: Error | null
 }
 
 export const useRegion = (): UseRegion => {
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const [regions, setRegion] = useState<RegionPrimitives[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [regions, setRegion] = useState<RegionPrimitives[]>([])
 
-    const gefetchData = useCallback(() => {
-        setLoading(true)
-        new AllRegionGetter(new ApiRegionRepository())
-            .get()
-            .then((res) => {
-                setRegion(res)
-                setLoading(false)
-            })
-            .catch((error) => {
-                setError(error)
-                setLoading(false)
-            })
-    }, [])
+	const gefetchData = useCallback(() => {
+		setLoading(true)
+		new AllRegionGetter(new ApiRegionRepository())
+			.get()
+			.then(res => {
+				setRegion(res)
+				setLoading(false)
+			})
+			.catch(error => {
+				setError(error)
+				setLoading(false)
+			})
+	}, [])
 
-    useEffect(() => {
-        gefetchData()
+	useEffect(() => {
+		gefetchData()
 
-        return () => {
-            setRegion([])
-        }
-    }, [gefetchData])
+		return () => {
+			setRegion([])
+		}
+	}, [gefetchData])
 
-    return {
-        regions,
-        loading,
-        error
-    }
+	return {
+		regions,
+		loading,
+		error
+	}
 }

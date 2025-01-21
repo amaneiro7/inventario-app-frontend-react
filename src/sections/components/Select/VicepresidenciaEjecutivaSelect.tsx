@@ -7,31 +7,35 @@ import { useVicepresidenciaEjecutiva } from '../../Hooks/area/useVicepresidencia
 const Select = lazy(async () => await import('./Select'))
 
 interface Props {
-  value: Primitives<VicepresidenciaEjecutivaId>
-  onChange: OnHandleChange
-  isRequired?: boolean
-  isForm?: boolean
+	value: Primitives<VicepresidenciaEjecutivaId>
+	onChange: OnHandleChange
+	isRequired?: boolean
+	isForm?: boolean
 }
 
-export default function VicepresidenciaEjecutivaSelect({ value, onChange, isRequired }: Props) {
-  const { vicepresidenciaEjecutiva } = useVicepresidenciaEjecutiva()
+export default function VicepresidenciaEjecutivaSelect({
+	value,
+	onChange,
+	isRequired
+}: Props) {
+	const { vicepresidenciaEjecutiva } = useVicepresidenciaEjecutiva()
 
-  return (
-    <Suspense>
-      <Select
-        label='vicepresidenciaEjecutiva'
-        name='vicepresidenciaEjecutivaId'
-        onChange={(event) => {
-          const { name, value } = event.target
-          onChange(name, value)
-        }}
-        options={vicepresidenciaEjecutiva}
-        placeholder='-- Filtre por VPE --'
-        isRequired={isRequired}
-        isHidden={false}
-        isDisabled={false}
-        value={value}
-      />
-    </Suspense>
-  )
+	return (
+		<Suspense>
+			<Select
+				label="vicepresidenciaEjecutiva"
+				name="vicepresidenciaEjecutivaId"
+				onChange={event => {
+					const { name, value } = event.target
+					onChange(name, value)
+				}}
+				options={vicepresidenciaEjecutiva}
+				placeholder="-- Filtre por VPE --"
+				isRequired={isRequired}
+				isHidden={false}
+				isDisabled={false}
+				value={value}
+			/>
+		</Suspense>
+	)
 }

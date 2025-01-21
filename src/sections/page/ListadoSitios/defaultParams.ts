@@ -8,34 +8,33 @@ import { type LocationName } from '../../../modules/location/locations/domain/Lo
 import { getValueFromQueryParams } from '../../utils/getValueFromQueryParams'
 
 export interface InputData {
-    name: Primitives<LocationName>
-    regionId: Primitives<RegionId>
-    stateId: Primitives<StateId>
-    cityId: Primitives<CityId>
-    typeOfSiteId: Primitives<TypeOfSiteId>
+	name: Primitives<LocationName>
+	regionId: Primitives<RegionId>
+	stateId: Primitives<StateId>
+	cityId: Primitives<CityId>
+	typeOfSiteId: Primitives<TypeOfSiteId>
 }
 
 export function useDefaultInitialInputValue(): {
-    inputData: InputData,
-    defaultInputData: InputData
+	inputData: InputData
+	defaultInputData: InputData
 } {
+	const defaultInputData = useMemo(() => {
+		return {
+			name: '',
+			regionId: '',
+			stateId: '',
+			cityId: '',
+			typeOfSiteId: ''
+		}
+	}, [])
 
-    const defaultInputData = useMemo(() => {
-        return {
-            name: '',
-            regionId: '',
-            stateId: '',
-            cityId: '',
-            typeOfSiteId: ''
-        }
-    }, [])
+	const getValuesFromQueryParams = useMemo(() => {
+		return getValueFromQueryParams(defaultInputData)
+	}, [defaultInputData])
 
-    const getValuesFromQueryParams = useMemo(() => {
-        return getValueFromQueryParams(defaultInputData)
-    }, [defaultInputData])
-
-    return {
-        defaultInputData,
-        inputData: { ...defaultInputData, ...getValuesFromQueryParams }
-    }
+	return {
+		defaultInputData,
+		inputData: { ...defaultInputData, ...getValuesFromQueryParams }
+	}
 }

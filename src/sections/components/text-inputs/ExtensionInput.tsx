@@ -5,51 +5,57 @@ import { Operator } from '../../../modules/shared/domain/criteria/FilterOperator
 import { Extension } from '../../../modules/employee/employee/domain/Extension'
 
 interface Props {
-  value: Primitives<Extension>
-  onChange: OnHandleChange
-  isForm?: boolean
+	value: Primitives<Extension>
+	onChange: OnHandleChange
+	isForm?: boolean
 }
 
-const FormInput = lazy(async () => import('./FormInput').then(m => ({ default: m.FormInput })))
+const FormInput = lazy(async () =>
+	import('./FormInput').then(m => ({ default: m.FormInput }))
+)
 
-export default function ExtensionInput ({ value, onChange, isForm = false }: Props) {
-  const [errorMessage, setErrorMessage] = useState('')
-  const [isError, setIsError] = useState(false)
-  const isFirstInput = useRef(true)
+export default function ExtensionInput({
+	value,
+	onChange,
+	isForm = false
+}: Props) {
+	const [errorMessage, setErrorMessage] = useState('')
+	const [isError, setIsError] = useState(false)
+	const isFirstInput = useRef(true)
 
-  useEffect(() => {
-    if (!isForm) return
+	useEffect(() => {
+		if (!isForm) return
 
-    if (isFirstInput.current || value === '') {
-      isFirstInput.current = value === ''
-      return
-    }
+		if (isFirstInput.current || value === '') {
+			isFirstInput.current = value === ''
+			return
+		}
 
-    const isValid = Extension.isValid(value)
+		const isValid = Extension.isValid(value)
 
-    setIsError(!isValid)
-    setErrorMessage(isValid ? '' : Extension.invalidMessage(value))
+		setIsError(!isValid)
+		setErrorMessage(isValid ? '' : Extension.invalidMessage(value))
 
-    return () => {
-      setErrorMessage('')
-      setIsError(false)
-    }
-  }, [value])
-  return (
-  <FormInput
-      id='extension'
-      isRequired={isForm}
-      name="extension"
-      type="tel"
-      label='Número de extensión'
-      placeholder='-- Ingrese el Nombre del usuario'
-      handle={(event) => {
-        const { name, value } = event.target
-        onChange(name, value, Operator.CONTAINS)
-      }}
-      value={value}
-      isError={isError}
-      errorMessage={errorMessage}
-  />
-  )
+		return () => {
+			setErrorMessage('')
+			setIsError(false)
+		}
+	}, [value])
+	return (
+		<FormInput
+			id="extension"
+			isRequired={isForm}
+			name="extension"
+			type="tel"
+			label="Número de extensión"
+			placeholder="-- Ingrese el Nombre del usuario"
+			handle={event => {
+				const { name, value } = event.target
+				onChange(name, value, Operator.CONTAINS)
+			}}
+			value={value}
+			isError={isError}
+			errorMessage={errorMessage}
+		/>
+	)
 }

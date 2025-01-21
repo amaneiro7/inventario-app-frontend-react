@@ -1,24 +1,28 @@
 export class EmployeeUserName {
-  static readonly NAME_MIN_LENGTH = 3
-  static readonly NAME_MAX_LENGTH = 15
-  static readonly regex = /^[a-zA-Z\s]*$/
+	static readonly NAME_MIN_LENGTH = 3
+	static readonly NAME_MAX_LENGTH = 15
+	static readonly regex = /^[a-zA-Z\s]*$/
 
-  constructor (readonly value: string) {
-    if (!EmployeeUserName.isValid(value)) {
-      throw new Error(EmployeeUserName.invalidMessage(value))
-    }
-  }
+	constructor(readonly value: string) {
+		if (!EmployeeUserName.isValid(value)) {
+			throw new Error(EmployeeUserName.invalidMessage(value))
+		}
+	}
 
-  public static isValid (value: string): boolean {
-    return EmployeeUserName.regex.test(value) && value.length >= EmployeeUserName.NAME_MIN_LENGTH && value.length <= EmployeeUserName.NAME_MAX_LENGTH
-  }
+	public static isValid(value: string): boolean {
+		return (
+			EmployeeUserName.regex.test(value) &&
+			value.length >= EmployeeUserName.NAME_MIN_LENGTH &&
+			value.length <= EmployeeUserName.NAME_MAX_LENGTH
+		)
+	}
 
-  public static invalidMessage (value: string): string {
-    if (!EmployeeUserName.regex.test(value)) {
-      return 'El userName debe contener solo letras'
-    }
-    return `El usuario ${value} no es válido. Debe tener entre ${EmployeeUserName.NAME_MIN_LENGTH} y ${EmployeeUserName.NAME_MAX_LENGTH} caracteres`
-  }
+	public static invalidMessage(value: string): string {
+		if (!EmployeeUserName.regex.test(value)) {
+			return 'El userName debe contener solo letras'
+		}
+		return `El usuario ${value} no es válido. Debe tener entre ${EmployeeUserName.NAME_MIN_LENGTH} y ${EmployeeUserName.NAME_MAX_LENGTH} caracteres`
+	}
 }
 
 // export class EmployeeUserName {

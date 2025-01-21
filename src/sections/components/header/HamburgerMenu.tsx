@@ -4,27 +4,28 @@ import { useCloseNavOnRouteChangeOrEscpae } from '@/sections/Hooks/useCloseNavOn
 import './HambuergerMenu.css'
 
 export function HamburgerMenu() {
-  const navToggleRef = useRef<HTMLInputElement>(null)
-  useCloseNavOnRouteChangeOrEscpae(navToggleRef)
+	const navToggleRef = useRef<HTMLInputElement>(null)
+	useCloseNavOnRouteChangeOrEscpae(navToggleRef)
 
-
-  return (
-    <>
-      <input 
-        type='checkbox' 
-        id='nav-toggle' 
-        aria-hidden
-        hidden
-        ref={navToggleRef}
-      />
-      <label 
-        className='hamburger hamburger--spin'
-        htmlFor='nav-toggle' aria-haspopup aria-expanded={false}
-      >
-        <span className='hamburger-box'>
-          <span className='hamburger-inner bg-white before:bg-white after:bg-white' />
-        </span>
-      </label>
-    </>
-  )
+	return (
+		<>
+			<input
+				type="checkbox"
+				id="nav-toggle"
+				aria-hidden
+				hidden
+				ref={navToggleRef}
+			/>
+			<label
+				className="hamburger hamburger--spin"
+				htmlFor="nav-toggle"
+				aria-haspopup
+				aria-expanded={false}
+			>
+				<span className="hamburger-box">
+					<span className="hamburger-inner bg-white before:bg-white after:bg-white" />
+				</span>
+			</label>
+		</>
+	)
 }

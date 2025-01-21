@@ -4,35 +4,35 @@ import { type CoordinacionId } from './CoordinacionId'
 import { type CoordinacionName } from './CoordinacionName'
 
 export interface CoordinacionPrimitives {
-  id: Primitives<CoordinacionId>
-  name: Primitives<CoordinacionName>
-  gerenciaId: Primitives<GerenciaId>
+	id: Primitives<CoordinacionId>
+	name: Primitives<CoordinacionName>
+	gerenciaId: Primitives<GerenciaId>
 }
 
 export class Gerencia {
-  constructor (
-    private readonly id: CoordinacionId,
-    private readonly name: CoordinacionName,
-    private readonly gerenciaId: GerenciaId
-  ) {}
+	constructor(
+		private readonly id: CoordinacionId,
+		private readonly name: CoordinacionName,
+		private readonly gerenciaId: GerenciaId
+	) {}
 
-  idValue (): Primitives<CoordinacionId> {
-    return this.id.value
-  }
+	idValue(): Primitives<CoordinacionId> {
+		return this.id.value
+	}
 
-  nameValue (): Primitives<CoordinacionName> {
-    return this.name.value
-  }
+	nameValue(): Primitives<CoordinacionName> {
+		return this.name.value
+	}
 
-  gerenciaValue (): Primitives<GerenciaId> {
-    return this.gerenciaId.value
-  }
+	gerenciaValue(): Primitives<GerenciaId> {
+		return this.gerenciaId.value
+	}
 
-  toPrimitives (): CoordinacionPrimitives {
-    return {
-      id: this.idValue(),
-      name: this.nameValue(),
-      gerenciaId: this.gerenciaValue()
-    }
-  }
+	toPrimitives(): CoordinacionPrimitives {
+		return {
+			id: this.idValue(),
+			name: this.nameValue(),
+			gerenciaId: this.gerenciaValue()
+		}
+	}
 }

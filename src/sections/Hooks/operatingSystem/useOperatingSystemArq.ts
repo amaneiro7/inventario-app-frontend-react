@@ -3,40 +3,40 @@ import { AllOperatingSystemArqGetter } from '../../../modules/devices/fetures/op
 import { type OperatingSystemArqPrimitives } from '../../../modules/devices/fetures/operatingSystem/operatingSystemArq/domain/OperatingSystemArq'
 import { ApiOperatingSystemArqRepository } from '../../../modules/devices/fetures/operatingSystem/operatingSystemArq/infrastructure/ApiOperatingSystemArqRepository'
 export interface UseOperatingSystemArq {
-  operatingSystemArq: OperatingSystemArqPrimitives[]
-  loading: boolean
-  error: string | null
+	operatingSystemArq: OperatingSystemArqPrimitives[]
+	loading: boolean
+	error: string | null
 }
 export const useOperatingSystemArq = (): UseOperatingSystemArq => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState<OperatingSystemArqPrimitives[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [data, setData] = useState<OperatingSystemArqPrimitives[]>([])
 
-  const fetchData = useCallback(() => {
-    setLoading(true)
-    new AllOperatingSystemArqGetter(new ApiOperatingSystemArqRepository())
-      .get()
-      .then((res) => {
-        setData(res)
-        setLoading(false)
-      })
-      .catch((error) => {
-        setError(error)
-        setLoading(false)
-      })
-  }, [])
+	const fetchData = useCallback(() => {
+		setLoading(true)
+		new AllOperatingSystemArqGetter(new ApiOperatingSystemArqRepository())
+			.get()
+			.then(res => {
+				setData(res)
+				setLoading(false)
+			})
+			.catch(error => {
+				setError(error)
+				setLoading(false)
+			})
+	}, [])
 
-  useEffect(() => {
-    fetchData()
+	useEffect(() => {
+		fetchData()
 
-    return () => {
-      setData([])
-    }
-  }, [fetchData])
+		return () => {
+			setData([])
+		}
+	}, [fetchData])
 
-  return {
-    operatingSystemArq: data,
-    loading,
-    error
-  }
+	return {
+		operatingSystemArq: data,
+		loading,
+		error
+	}
 }

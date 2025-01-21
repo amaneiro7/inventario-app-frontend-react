@@ -4,11 +4,13 @@ import { LocationCreator } from '../../../modules/location/locations/application
 import { ApiLocationRepository } from '../../../modules/location/locations/infraestructure/ApiLocationRepository'
 
 export const useCreateLocation = (): {
-    createLocation: (formData: LocationPrimitives) => Promise<void>
+	createLocation: (formData: LocationPrimitives) => Promise<void>
 } => {
-    return {
-        createLocation: useCallback(async (formData: LocationPrimitives) => {
-            return await new LocationCreator(new ApiLocationRepository()).create(formData)
-        }, [])
-    }
+	return {
+		createLocation: useCallback(async (formData: LocationPrimitives) => {
+			return await new LocationCreator(
+				new ApiLocationRepository()
+			).create(formData)
+		}, [])
+	}
 }

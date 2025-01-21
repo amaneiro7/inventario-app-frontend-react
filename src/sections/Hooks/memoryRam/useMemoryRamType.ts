@@ -4,40 +4,40 @@ import { type MemoryRamTypePrimitives } from '../../../modules/devices/fetures/m
 import { ApiMemoryRamTypeRepository } from '../../../modules/devices/fetures/memoryRam/memoryRamType/infrastructure/ApiMemoryRamTypeRepository'
 
 export interface UseMemoryRamType {
-  memoryRamTypes: MemoryRamTypePrimitives[]
-  loading: boolean
-  error: null | string
+	memoryRamTypes: MemoryRamTypePrimitives[]
+	loading: boolean
+	error: null | string
 }
 export const useMemoryRamType = (): UseMemoryRamType => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState<MemoryRamTypePrimitives[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [data, setData] = useState<MemoryRamTypePrimitives[]>([])
 
-  const fetchData = useCallback(() => {
-    setLoading(true)
-    new AllMemoryRamTypeGetter(new ApiMemoryRamTypeRepository())
-      .get()
-      .then((res) => {
-        setData(res)
-        setLoading(false)
-      })
-      .catch((error) => {
-        setError(error)
-        setLoading(false)
-      })
-  }, [])
+	const fetchData = useCallback(() => {
+		setLoading(true)
+		new AllMemoryRamTypeGetter(new ApiMemoryRamTypeRepository())
+			.get()
+			.then(res => {
+				setData(res)
+				setLoading(false)
+			})
+			.catch(error => {
+				setError(error)
+				setLoading(false)
+			})
+	}, [])
 
-  useEffect(() => {
-    fetchData()
+	useEffect(() => {
+		fetchData()
 
-    return () => {
-      setData([])
-    }
-  }, [fetchData])
+		return () => {
+			setData([])
+		}
+	}, [fetchData])
 
-  return {
-    memoryRamTypes: data,
-    loading,
-    error
-  }
+	return {
+		memoryRamTypes: data,
+		loading,
+		error
+	}
 }

@@ -1,18 +1,21 @@
 export class BrandName {
-  static readonly NAME_MIN_LENGTH = 2
-  static readonly NAME_MAX_LENGTH = 100
+	static readonly NAME_MIN_LENGTH = 2
+	static readonly NAME_MAX_LENGTH = 100
 
-  constructor (readonly value: string) {
-    if (!BrandName.isValid(value)) {
-      throw new Error(BrandName.invalidMessage(value))
-    }
-  }
+	constructor(readonly value: string) {
+		if (!BrandName.isValid(value)) {
+			throw new Error(BrandName.invalidMessage(value))
+		}
+	}
 
-  public static isValid (value: string): boolean {
-    return value.length >= BrandName.NAME_MIN_LENGTH && value.length <= BrandName.NAME_MAX_LENGTH
-  }
+	public static isValid(value: string): boolean {
+		return (
+			value.length >= BrandName.NAME_MIN_LENGTH &&
+			value.length <= BrandName.NAME_MAX_LENGTH
+		)
+	}
 
-  public static invalidMessage (value: string): string {
-    return `El nombre ${value} no es válido. Debe tener entre ${BrandName.NAME_MIN_LENGTH} y ${BrandName.NAME_MAX_LENGTH} caracteres`
-  }
+	public static invalidMessage(value: string): string {
+		return `El nombre ${value} no es válido. Debe tener entre ${BrandName.NAME_MIN_LENGTH} y ${BrandName.NAME_MAX_LENGTH} caracteres`
+	}
 }

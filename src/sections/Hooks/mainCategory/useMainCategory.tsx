@@ -3,43 +3,45 @@ import { AllMainCategoryGetter } from '@/modules/devices/mainCategory/applicatio
 import { ApiMainCategoryRepository } from '@/modules/devices/mainCategory/infraestructure/ApiMainCategoryRepository'
 import { type MainCategoryPrimitives } from '@/modules/devices/mainCategory/domain/MainCategory'
 
-
 export interface UseMainCategory {
-  mainCategories: MainCategoryPrimitives[]
-  loading: boolean
-  error: string | null
+	mainCategories: MainCategoryPrimitives[]
+	loading: boolean
+	error: string | null
 }
 
 export const useMainCategory = (): UseMainCategory => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [mainCategories, setMainCategory] = useState<MainCategoryPrimitives[]>([])
-  
-  const getMainCategory = useCallback(() => {
-    setLoading(true)    
-    new AllMainCategoryGetter(new ApiMainCategoryRepository())
-      .get()
-      .then((res) => {
-        setMainCategory(res)
-      })
-      .catch((error) => {
-        setError(error)
-      }).finally(() => {
-        setLoading(false)
-      })
-  }, [])
-  
-  useEffect(() => {
-    getMainCategory()
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [mainCategories, setMainCategory] = useState<
+		MainCategoryPrimitives[]
+	>([])
 
-    return () => {
-      setMainCategory([])
-    }
-  }, [getMainCategory])
+	const getMainCategory = useCallback(() => {
+		setLoading(true)
+		new AllMainCategoryGetter(new ApiMainCategoryRepository())
+			.get()
+			.then(res => {
+				setMainCategory(res)
+			})
+			.catch(error => {
+				setError(error)
+			})
+			.finally(() => {
+				setLoading(false)
+			})
+	}, [])
 
-  return {
-    mainCategories,
-    loading,
-    error
-  }
+	useEffect(() => {
+		getMainCategory()
+
+		return () => {
+			setMainCategory([])
+		}
+	}, [getMainCategory])
+
+	return {
+		mainCategories,
+		loading,
+		error
+	}
 }

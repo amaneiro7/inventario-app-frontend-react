@@ -1,10 +1,5 @@
-import { ModelContextProvider } from "../ModelProvider";
+import { ModelContextProvider } from '../ModelProvider'
 
-export default function ModelConsumer({children}: React.PropsWithChildren) {
-  return (
-    <ModelContextProvider>
-      {children}
-    </ModelContextProvider>
-    
-  )
+export default function ModelConsumer({ children }: React.PropsWithChildren) {
+	return <ModelContextProvider>{children}</ModelContextProvider>
 }

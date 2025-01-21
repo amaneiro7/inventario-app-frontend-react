@@ -5,51 +5,57 @@ import { Operator } from '../../../modules/shared/domain/criteria/FilterOperator
 import { EmployeeEmail } from '../../../modules/employee/employee/domain/EmployeeEmail'
 
 interface Props {
-  value: Primitives<EmployeeEmail>
-  onChange: OnHandleChange
-  isForm?: boolean
+	value: Primitives<EmployeeEmail>
+	onChange: OnHandleChange
+	isForm?: boolean
 }
 
-const FormInput = lazy(async () => import('./FormInput').then(m => ({ default: m.FormInput })))
+const FormInput = lazy(async () =>
+	import('./FormInput').then(m => ({ default: m.FormInput }))
+)
 
-export default function EmployeeEmailInput ({ value, onChange, isForm = false }: Props) {
-  const [errorMessage, setErrorMessage] = useState('')
-  const [isError, setIsError] = useState(false)
-  const isFirstInput = useRef(true)
+export default function EmployeeEmailInput({
+	value,
+	onChange,
+	isForm = false
+}: Props) {
+	const [errorMessage, setErrorMessage] = useState('')
+	const [isError, setIsError] = useState(false)
+	const isFirstInput = useRef(true)
 
-  useEffect(() => {
-    if (!isForm) return
+	useEffect(() => {
+		if (!isForm) return
 
-    if (isFirstInput.current || value === '') {
-      isFirstInput.current = value === ''
-      return
-    }
+		if (isFirstInput.current || value === '') {
+			isFirstInput.current = value === ''
+			return
+		}
 
-    const isValid = EmployeeEmail.isValid(value)
+		const isValid = EmployeeEmail.isValid(value)
 
-    setIsError(!isValid)
-    setErrorMessage(isValid ? '' : EmployeeEmail.invalidMessage(value))
+		setIsError(!isValid)
+		setErrorMessage(isValid ? '' : EmployeeEmail.invalidMessage(value))
 
-    return () => {
-      setErrorMessage('')
-      setIsError(false)
-    }
-  }, [isForm, value])
-  return (
-    <FormInput
-      id='email'
-      isRequired={isForm}
-      name='email'
-      type='email'
-      label='Correo Electronico'
-      placeholder='-- Ingrese el Correo Eléctronico del usuario'
-      handle={(event) => {
-        const { name, value } = event.target
-        onChange(name, value, Operator.CONTAINS)
-      }}
-      value={value}
-      isError={isError}
-      errorMessage={errorMessage}
-    />
-  )
+		return () => {
+			setErrorMessage('')
+			setIsError(false)
+		}
+	}, [isForm, value])
+	return (
+		<FormInput
+			id="email"
+			isRequired={isForm}
+			name="email"
+			type="email"
+			label="Correo Electronico"
+			placeholder="-- Ingrese el Correo Eléctronico del usuario"
+			handle={event => {
+				const { name, value } = event.target
+				onChange(name, value, Operator.CONTAINS)
+			}}
+			value={value}
+			isError={isError}
+			errorMessage={errorMessage}
+		/>
+	)
 }

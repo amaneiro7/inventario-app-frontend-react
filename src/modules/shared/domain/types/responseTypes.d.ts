@@ -46,171 +46,170 @@ import { type DeviceStockNumber } from '../../../devices/devices/devices/domain/
 import { type MFPPrimitives } from '@/modules/devices/fetures/multiFunctionalPrinter/MFP'
 
 interface UserApiResponse {
-  user: UserApiResponsePrimitives
-  message: string
-  refreshToken: string
-  roleId: Primitives<RoleId>
-  role: {
-    id: Primitives<RoleId>
-    name: string
-  }
+	user: UserApiResponsePrimitives
+	message: string
+	refreshToken: string
+	roleId: Primitives<RoleId>
+	role: {
+		id: Primitives<RoleId>
+		name: string
+	}
 }
 
 export interface UserApiResponsePrimitives extends UserPrimitives {
-  role: {
-    id: Primitives<RoleId>
-    name: string
-  }
+	role: {
+		id: Primitives<RoleId>
+		name: string
+	}
 }
 
 export interface CategoryApiResponse extends CategoryPrimitives {
-  mainCategory: CategoryPrimitives
+	mainCategory: CategoryPrimitives
 }
 
 export interface DevicesApiResponse extends DevicePrimitives {
-  createdAt: string
-  updatedAt: string
-  category: CategoryApiResponse
-  brand: BrandPrimitives
-  model: ModelApiresponse
-  location: LocationPrimitives
-  employee: EmployeePrimitives | null
-  status: StatusPrimitives
-  computer: Computer | null
-  hardDrive: HardDrive | null
-  mfp: MFP | null
-  history: HistoryApiResponse[]
+	createdAt: string
+	updatedAt: string
+	category: CategoryApiResponse
+	brand: BrandPrimitives
+	model: ModelApiresponse
+	location: LocationPrimitives
+	employee: EmployeePrimitives | null
+	status: StatusPrimitives
+	computer: Computer | null
+	hardDrive: HardDrive | null
+	mfp: MFP | null
+	history: HistoryApiResponse[]
 }
 
 export interface HistoryApiResponse extends HistoryPrimitives {
-  employee: EmployeePrimitives
-  user: Pick<UserPrimitives, 'email' | 'name' | 'lastName'>
-  createdAt: string
-  updatedAt: string
+	employee: EmployeePrimitives
+	user: Pick<UserPrimitives, 'email' | 'name' | 'lastName'>
+	createdAt: string
+	updatedAt: string
 }
 
 export interface EmployeesApiResponse extends EmployeePrimitives {
-  createdAt: string
-  updatedAt: string
-  devices: DevicesApiResponse[]
+	createdAt: string
+	updatedAt: string
+	devices: DevicesApiResponse[]
 }
 
 export interface EmployeeMappedApiResponse extends EmployeePrimitives {
-  createdAt: string
-  updatedAt: string
-  devices?: DevicePrimitives[]
+	createdAt: string
+	updatedAt: string
+	devices?: DevicePrimitives[]
 }
 export interface EmployeeDevicesMappedApiResponse extends EmployeePrimitives {
-  createdAt: string
-  updatedAt: string
-  computers: DevicesApiResponse[]
-  monitores: DevicesApiResponse[]
+	createdAt: string
+	updatedAt: string
+	computers: DevicesApiResponse[]
+	monitores: DevicesApiResponse[]
 }
 
 export interface DevicesMappedApiResponse {
-  id: Primitives<DeviceId>
-  activo: Primitives<DeviceActivo>
-  serial: Primitives<DeviceSerial>
-  statusId: Primitives<StatusId>
-  categoryId: Primitives<CategoryId>
-  categoryName: Primitives<CategoryName>
-  brandId: Primitives<BrandId>
-  brandName: Primitives<BrandName>
-  statusName: Primitives<StatusName>
-  modelId: Primitives<ModelId>
-  modelName: Primitives<ModelName>
-  observation: Primitives<DeviceObservation>
-  stockNumber: Primitives<DeviceStockNumber>
-  locationId: Primitives<LocationId>
-  locationName: string
-  employeeId: Primitives<EmployeeId> | null
-  employeeUserName: Primitives<EmployeeUserName>
-  computer: Computer | null
-  hardDrive: HardDrive | null
-  createdAt: string
-  updatedAt: string
+	id: Primitives<DeviceId>
+	activo: Primitives<DeviceActivo>
+	serial: Primitives<DeviceSerial>
+	statusId: Primitives<StatusId>
+	categoryId: Primitives<CategoryId>
+	categoryName: Primitives<CategoryName>
+	brandId: Primitives<BrandId>
+	brandName: Primitives<BrandName>
+	statusName: Primitives<StatusName>
+	modelId: Primitives<ModelId>
+	modelName: Primitives<ModelName>
+	observation: Primitives<DeviceObservation>
+	stockNumber: Primitives<DeviceStockNumber>
+	locationId: Primitives<LocationId>
+	locationName: string
+	employeeId: Primitives<EmployeeId> | null
+	employeeUserName: Primitives<EmployeeUserName>
+	computer: Computer | null
+	hardDrive: HardDrive | null
+	createdAt: string
+	updatedAt: string
 }
 export interface BrandApiResponse extends BrandPrimitives {
-  id: Primitives<BrandId>
-  createdAt: string
-  updatedAt: string
-  model: ModelPrimitives[]
+	id: Primitives<BrandId>
+	createdAt: string
+	updatedAt: string
+	model: ModelPrimitives[]
 }
 
 export interface ModelApiresponse extends ModelPrimitives {
-  id: Primitives<ModelId>
-  createdAt: string
-  updatedAt: string
-  category: CategoryPrimitives
-  brand: BrandPrimitives
-  modelPrinter: ModelPrinter
-  modelMonitor: ModelMonitor
-  modelComputer: ModelComputer
-  modelLaptop: ModelLaptop
-  modelKeyboard: ModelKeyboard
+	id: Primitives<ModelId>
+	createdAt: string
+	updatedAt: string
+	category: CategoryPrimitives
+	brand: BrandPrimitives
+	modelPrinter: ModelPrinter
+	modelMonitor: ModelMonitor
+	modelComputer: ModelComputer
+	modelLaptop: ModelLaptop
+	modelKeyboard: ModelKeyboard
 }
 
 export interface ModelComputer extends ModelComputerPrimitives {
-  memoryRamType: MemoryRamTypePrimitives
+	memoryRamType: MemoryRamTypePrimitives
 }
 export interface ModelLaptop extends ModelLaptopPrimitives {
-  memoryRamType: MemoryRamTypePrimitives
+	memoryRamType: MemoryRamTypePrimitives
 }
 
 export type ModelPrinter = ModelPrinterPrimitives
 
 export type ModelMonitor = ModelMonitorPrimitives
 export interface ModelKeyboard extends ModelKeyboardPrimitives {
-  inputType: InputTypePrimitives
+	inputType: InputTypePrimitives
 }
 
-
 export interface Computer extends ComputerPrimitives {
-  deviceId: Primitives<DeviceId>
-  createdAt: string
-  updatedAt: string
-  processor: ProcessorApiresponse
-  hardDriveCapacity: HardDriveCapacityPrimitives
-  hardDriveType: HardDriveTypePrimitives
-  operatingSystem: OperatingSystemPrimitives
-  operatingSystemArq: OperatingSystemArqPrimitives
+	deviceId: Primitives<DeviceId>
+	createdAt: string
+	updatedAt: string
+	processor: ProcessorApiresponse
+	hardDriveCapacity: HardDriveCapacityPrimitives
+	hardDriveType: HardDriveTypePrimitives
+	operatingSystem: OperatingSystemPrimitives
+	operatingSystemArq: OperatingSystemArqPrimitives
 }
 
 export interface BrandApiResponse extends BrandPrimitives {
-  createdAt: string
-  updatedAt: string
+	createdAt: string
+	updatedAt: string
 }
 export interface ProcessorApiresponse extends ProcessorPrimitives {
-  createdAt: string
-  updatedAt: string
+	createdAt: string
+	updatedAt: string
 }
 
 export interface LocationApiResponse extends LocationPrimitives {
-  id: Primitives<LocationId>
-  typeOfSite: TypeOfSitePrimitives
-  site: SiteApiResponse
+	id: Primitives<LocationId>
+	typeOfSite: TypeOfSitePrimitives
+	site: SiteApiResponse
 }
 
 export interface SiteApiResponse extends SitePrimitives {
-  city: CityApiResponse
+	city: CityApiResponse
 }
 
 export interface CityApiResponse extends CityPrimitives {
-  state: StateApiResponse
+	state: StateApiResponse
 }
 
 export interface StateApiResponse extends StatePrimitives {
-  region: RegionPrimitives
+	region: RegionPrimitives
 }
 
 export interface HardDrive extends HardDrivePrimitives {
-  id: Primitives<HardDriveId>
-  categoryId: Primitives<CategoryId>
-  deviceId: Primitives<DeviceId>
-  createdAt: string
-  updatedAt: string
-  hardDriveCapacity: HardDriveCapacityPrimitives
-  hardDriveType: HardDriveTypePrimitives
+	id: Primitives<HardDriveId>
+	categoryId: Primitives<CategoryId>
+	deviceId: Primitives<DeviceId>
+	createdAt: string
+	updatedAt: string
+	hardDriveCapacity: HardDriveCapacityPrimitives
+	hardDriveType: HardDriveTypePrimitives
 }
 
 export type MFP = MFPPrimitives

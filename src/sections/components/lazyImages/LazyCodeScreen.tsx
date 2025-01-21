@@ -1,7 +1,11 @@
-import Img from "../../../assets/codescreen.jpg";
+import Img from '../../../assets/codescreen.jpg'
 
-interface Props extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {}
+interface Props
+	extends React.DetailedHTMLProps<
+		React.ImgHTMLAttributes<HTMLImageElement>,
+		HTMLImageElement
+	> {}
 
-export function LazyCodeScrenImage({...props}: Props) {
-  return <img {...props} src={Img} alt='Laptop Code Screen' />;
+export function LazyCodeScrenImage({ ...props }: Props) {
+	return <img {...props} src={Img} alt="Laptop Code Screen" />
 }

@@ -5,37 +5,40 @@ import { EmployeePrimitives } from '../../../modules/employee/employee/domain/Em
 import { ApiEmployeeRepository } from '../../../modules/employee/employee/infrastructure/ApiEmployeeRepository'
 
 export interface UseSearchEmployee {
-  employees: EmployeePrimitives[]
-  loading: boolean
-  error: string | null
-  searchEmployees: (filter: SearchByCriteriaQuery) => Promise<void>
+	employees: EmployeePrimitives[]
+	loading: boolean
+	error: string | null
+	searchEmployees: (filter: SearchByCriteriaQuery) => Promise<void>
 }
 
 export const useSearchEmployee = (): UseSearchEmployee => {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [employees, setEmployees] = useState<EmployeePrimitives[]>([])
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState(null)
+	const [employees, setEmployees] = useState<EmployeePrimitives[]>([])
 
-  const searchEmployees = useCallback(async (filter: SearchByCriteriaQuery): Promise<void> => {
-    setLoading(true)
-    new EmployeeGetterByCriteria(new ApiEmployeeRepository())
-      .get(filter)
-      .then((devices) => {
-        setEmployees(devices)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error('searchEmployees', error)
+	const searchEmployees = useCallback(
+		async (filter: SearchByCriteriaQuery): Promise<void> => {
+			setLoading(true)
+			new EmployeeGetterByCriteria(new ApiEmployeeRepository())
+				.get(filter)
+				.then(devices => {
+					setEmployees(devices)
+					setLoading(false)
+				})
+				.catch(error => {
+					console.error('searchEmployees', error)
 
-        setError(error)
-        setLoading(false)
-      })
-  }, [])
+					setError(error)
+					setLoading(false)
+				})
+		},
+		[]
+	)
 
-  return {
-    employees,
-    loading,
-    error,
-    searchEmployees
-  }
+	return {
+		employees,
+		loading,
+		error,
+		searchEmployees
+	}
 }

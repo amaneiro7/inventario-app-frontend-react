@@ -6,53 +6,62 @@ import { ApiEmployeeRepository } from '../../../modules/employee/employee/infras
 import { type EmployeePrimitives } from '../../../modules/employee/employee/domain/Employee'
 
 export interface UseEmployee {
-  employees: EmployeePrimitives[]
-  loading: boolean
-  error: string | null
-  getEmployee: EmployeeGetter
-  createEmployee: (formData: EmployeePrimitives) => Promise<void>
+	employees: EmployeePrimitives[]
+	loading: boolean
+	error: string | null
+	getEmployee: EmployeeGetter
+	createEmployee: (formData: EmployeePrimitives) => Promise<void>
 }
 
 export const useEmployee = (): UseEmployee => {
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [employees, setEmployees] = useState<EmployeePrimitives[]>([])
+	const [loading, setLoading] = useState<boolean>(true)
+	const [error, setError] = useState<string | null>(null)
+	const [employees, setEmployees] = useState<EmployeePrimitives[]>([])
 
-  const repository = useMemo(() => { return new ApiEmployeeRepository() }, [])
-  const getEmployee = useMemo(() => { return new EmployeeGetter(repository) }, [repository])
+	const repository = useMemo(() => {
+		return new ApiEmployeeRepository()
+	}, [])
+	const getEmployee = useMemo(() => {
+		return new EmployeeGetter(repository)
+	}, [repository])
 
-  const searchEmployees = useCallback(() => {
-    setLoading(true)
-    new AllEmployeeGetter(repository)
-      .get()
-      .then((employees) => {
-        setEmployees(employees)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error('searchEmployees', error)
-        setError('An unexpected error occurred while trying to search employees')
-        setLoading(false)
-      })
-  }, [repository])
+	const searchEmployees = useCallback(() => {
+		setLoading(true)
+		new AllEmployeeGetter(repository)
+			.get()
+			.then(employees => {
+				setEmployees(employees)
+				setLoading(false)
+			})
+			.catch(error => {
+				console.error('searchEmployees', error)
+				setError(
+					'An unexpected error occurred while trying to search employees'
+				)
+				setLoading(false)
+			})
+	}, [repository])
 
-  const createEmployee = useCallback(async (formData: EmployeePrimitives) => {
-    const data = await new EmployeeCreator(repository).create(formData)
-    searchEmployees()
-    return data
-  }, [repository, searchEmployees])
+	const createEmployee = useCallback(
+		async (formData: EmployeePrimitives) => {
+			const data = await new EmployeeCreator(repository).create(formData)
+			searchEmployees()
+			return data
+		},
+		[repository, searchEmployees]
+	)
 
-  useEffect(() => {
-    searchEmployees()
-    return () => {
-      setEmployees([])
-    }
-  }, [searchEmployees])
-  return {
-    employees,
-    loading,
-    error,
-    getEmployee,
-    createEmployee,
-  }
+	useEffect(() => {
+		searchEmployees()
+		return () => {
+			setEmployees([])
+		}
+	}, [searchEmployees])
+	return {
+		employees,
+		loading,
+		error,
+		getEmployee,
+		createEmployee
+	}
 }

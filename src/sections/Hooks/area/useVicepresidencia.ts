@@ -4,40 +4,40 @@ import { AllVicepresidenciaGetter } from '../../../modules/employee/area/vicepre
 import { ApiVicepresidenciaRepository } from '../../../modules/employee/area/vicepresidencia/infraestructure/ApiVicepresidenciaRepository'
 
 export interface UseVicepresidencia {
-  vicepresidencia: VicepresidenciaPrimitives[]
-  loading: boolean
-  error: string | null
+	vicepresidencia: VicepresidenciaPrimitives[]
+	loading: boolean
+	error: string | null
 }
 export const useVicepresidencia = () => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState<VicepresidenciaPrimitives[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [data, setData] = useState<VicepresidenciaPrimitives[]>([])
 
-  const fetchData = useCallback(() => {
-    setLoading(true)
-    new AllVicepresidenciaGetter(new ApiVicepresidenciaRepository())
-      .get()
-      .then((res) => {
-        setData(res)
-        setLoading(false)
-      })
-      .catch((error) => {
-        setError(error)
-        setLoading(false)
-      })
-  }, [])
+	const fetchData = useCallback(() => {
+		setLoading(true)
+		new AllVicepresidenciaGetter(new ApiVicepresidenciaRepository())
+			.get()
+			.then(res => {
+				setData(res)
+				setLoading(false)
+			})
+			.catch(error => {
+				setError(error)
+				setLoading(false)
+			})
+	}, [])
 
-  useEffect(() => {
-    fetchData()
+	useEffect(() => {
+		fetchData()
 
-    return () => {
-      setData([])
-    }
-  }, [fetchData])
+		return () => {
+			setData([])
+		}
+	}, [fetchData])
 
-  return {
-    vicepresidencia: data,
-    loading,
-    error
-  }
+	return {
+		vicepresidencia: data,
+		loading,
+		error
+	}
 }
