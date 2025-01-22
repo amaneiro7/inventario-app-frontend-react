@@ -6,7 +6,10 @@ export class DeviceSerial extends AcceptedNullValueObject<string> {
 	static readonly notLowerCase = /^[^a-z]*$/
 	static readonly notSpecialCharacterOnlyGuiones = /^[^\W_]*-?[^\W_]*$/
 	static errors: string = ''
-	constructor(value: string, readonly genericModel?: boolean) {
+	constructor(
+		value: string,
+		readonly genericModel?: boolean
+	) {
 		super(value)
 		if (!DeviceSerial.isValid(value, genericModel)) {
 			throw new Error(DeviceSerial.invalidMessage())
