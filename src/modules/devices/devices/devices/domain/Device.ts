@@ -65,7 +65,7 @@ export class Device {
 		return this.serial.value
 	}
 
-	activoValue(): Primitives<DeviceActivo> | null {
+	activoValue(): Primitives<DeviceActivo> {
 		return this.activo.value
 	}
 

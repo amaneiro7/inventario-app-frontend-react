@@ -1,13 +1,13 @@
-export class DeviceSerial {
+import { AcceptedNullValueObject } from '@/modules/shared/domain/value-object/AcceptedNullValueObjects'
+
+export class DeviceSerial extends AcceptedNullValueObject<string> {
 	static readonly NAME_MIN_LENGTH = 5
 	static readonly NAME_MAX_LENGTH = 100
 	static readonly notLowerCase = /^[^a-z]*$/
 	static readonly notSpecialCharacterOnlyGuiones = /^[^\W_]*-?[^\W_]*$/
 	static errors: string = ''
-	constructor(
-		readonly value: string,
-		readonly genericModel?: boolean
-	) {
+	constructor(value: string, readonly genericModel?: boolean) {
+		super(value)
 		if (!DeviceSerial.isValid(value, genericModel)) {
 			throw new Error(DeviceSerial.invalidMessage())
 		}
@@ -29,7 +29,7 @@ export class DeviceSerial {
 			)
 			return false
 		}
-		//if (value === null || value === '') return true
+
 		const errorMesagge: string[] = []
 		const isHasNotSpecialCharacterOnlyGuiones =
 			this.notSpecialCharacterOnlyGuiones.test(value)

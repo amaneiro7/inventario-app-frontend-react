@@ -9,15 +9,10 @@ export class DeviceEmployee extends AcceptedNullValueObject<
 > {
 	private static errors: string = ''
 	constructor(
-		readonly value: Primitives<DeviceId> | null,
+		value: Primitives<DeviceId> | null,
 		private readonly status: Primitives<StatusId>
 	) {
 		super(value)
-		if (!value) {
-			this.value = null
-		} else {
-			this.value = value
-		}
 
 		if (!DeviceEmployee.isValid(this.value, this.status)) {
 			throw new Error(DeviceEmployee.invalidMessage())

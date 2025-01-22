@@ -4,7 +4,7 @@ export abstract class AcceptedNullValueObject<T extends Primitives> {
 	value: T | null
 
 	constructor(value: T | null) {
-		if (value === '' || value === undefined) {
+		if (!value) {
 			this.value = null
 		} else {
 			this.value = value
