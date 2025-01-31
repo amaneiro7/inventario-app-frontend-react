@@ -9,84 +9,33 @@ const ProtectedRoute = lazy(
 		}))
 )
 const Login = lazy(async () => await import('../page/login/LoginPage.tsx'))
-const ProfilePage = lazy(
-	async () => await import('../page/profile/ProfilePage.tsx')
-)
+const ProfilePage = lazy(async () => await import('../page/profile/ProfilePage.tsx'))
 const NotFound = lazy(async () => await import('../page/404/index.tsx'))
 const Layout = lazy(async () => await import('../components/Layout.tsx'))
-const DeviceConsumer = lazy(
-	async () => await import('../Context/Consumer/DeviceConsumer.tsx')
-)
-const ModelConsumer = lazy(
-	async () => await import('../Context/Consumer/ModelConsumer.tsx')
-)
-const LocationConsumer = lazy(
-	async () => await import('../Context/Consumer/LocationConsumer.tsx')
-)
+const DeviceConsumer = lazy(async () => await import('../Context/Consumer/DeviceConsumer.tsx'))
+const ModelConsumer = lazy(async () => await import('../Context/Consumer/ModelConsumer.tsx'))
+const LocationConsumer = lazy(async () => await import('../Context/Consumer/LocationConsumer.tsx'))
 const Home = lazy(async () => await import('../page/home/Home.tsx'))
-const Dashboard = lazy(
-	async () => await import('../page/dashboard/Dashboard.tsx')
-)
-const ListadoSitios = lazy(
-	async () => await import('../page/ListadoSitios/ListadoSitios.tsx')
-)
-const ListadoModelos = lazy(
-	async () => await import('../page/ListadoModelos/ListadoModelos.tsx')
-)
-const ListComputer = lazy(
-	async () =>
-		await import('../page/ListWrapper/ListComputer/ListComputer.tsx')
-)
-const ListMonitor = lazy(
-	async () => await import('../page/ListWrapper/ListMonitor/ListMonitor.tsx')
-)
+const Dashboard = lazy(async () => await import('../page/dashboard/Dashboard.tsx'))
+const ListadoSitios = lazy(async () => await import('../page/ListadoSitios/ListadoSitios.tsx'))
+const ListadoModelos = lazy(async () => await import('../page/ListadoModelos/ListadoModelos.tsx'))
+const ListComputer = lazy(async () => await import('../page/ListWrapper/ListComputer/ListComputer.tsx'))
+const ListMonitor = lazy(async () => await import('../page/ListWrapper/ListMonitor/ListMonitor.tsx'))
 const ListFinantialPrinter = lazy(
-	async () =>
-		await import(
-			'../page/ListWrapper/ListFinantialPrinterPrinter/ListFinantialPrinter.tsx'
-		)
+	async () => await import('../page/ListWrapper/ListFinantialPrinterPrinter/ListFinantialPrinter.tsx')
 )
-const ListPartAndPieces = lazy(
-	async () =>
-		await import(
-			'../page/ListWrapper/ListPartAndPieces/ListPartsAndPieces.tsx'
-		)
-)
-const ListPrinters = lazy(
-	async () => await import('../page/ListWrapper/ListPrinters/ListPrinter.tsx')
-)
-const CreateEmployeeForm = lazy(
-	async () => await import('../page/FormEmployee/CreateEmployeeForm.tsx')
-)
-const CreateDeviceForm = lazy(
-	async () => await import('../page/FormDevice/CreateDeviceForm.tsx')
-)
-const CreateBrandForm = lazy(
-	async () => await import('../page/FormBrand/CreateBrandForm.tsx')
-)
-const CreateModelForm = lazy(
-	async () => await import('../page/FormModel/CreateModelForm.tsx')
-)
-const CreateLocationForm = lazy(
-	async () => await import('../page/FormLocation/CreateLocationForm.tsx')
-)
-const CreateProcessorForm = lazy(
-	async () => await import('../page/FormProcessor/CreateProcessorForm.tsx')
-)
-const CreateSiteForm = lazy(
-	async () => await import('../page/FormSite/CreateSiteForm.tsx')
-)
-const UserManagement = lazy(
-	async () => await import('../page/user-management/UserManagement.tsx')
-)
-const RegisterPage = lazy(
-	async () =>
-		await import('../page/user-management/register/RegisterPage.tsx')
-)
-const ManagementProfile = lazy(
-	async () =>
-		await import('../page/user-management/profile/ManagementProfile.tsx')
-)
+const ListPartAndPieces = lazy(async () => await import('../page/ListWrapper/ListPartAndPieces/ListPartsAndPieces.tsx'))
+const ListPrinters = lazy(async () => await import('../page/ListWrapper/ListPrinters/ListPrinter.tsx'))
+const CreateEmployeeForm = lazy(async () => await import('../page/FormEmployee/CreateEmployeeForm.tsx'))
+const CreateDeviceForm = lazy(async () => await import('../page/FormDevice/CreateDeviceForm.tsx'))
+const CreateBrandForm = lazy(async () => await import('../page/FormBrand/CreateBrandForm.tsx'))
+const CreateModelForm = lazy(async () => await import('../page/FormModel/CreateModelForm.tsx'))
+const CreateLocationForm = lazy(async () => await import('../page/FormLocation/CreateLocationForm.tsx'))
+const CreateProcessorForm = lazy(async () => await import('../page/FormProcessor/CreateProcessorForm.tsx'))
+const CreateSiteForm = lazy(async () => await import('../page/FormSite/CreateSiteForm.tsx'))
+const UserManagement = lazy(async () => await import('../page/user-management/UserManagement.tsx'))
+const RegisterPage = lazy(async () => await import('../page/user-management/register/RegisterPage.tsx'))
+const ManagementProfile = lazy(async () => await import('../page/user-management/profile/ManagementProfile.tsx'))
 
 export default function AppRoutes(): JSX.Element {
 	const {
