@@ -16,12 +16,8 @@ const DetailsWrapper = lazy(async () =>
 		default: m.DetailsWrapper
 	}))
 )
-const DetailsBoxWrapper = lazy(
-	async () => import('../DetailsWrapper/DetailsBoxWrapper')
-)
-const FilterSection = lazy(async () =>
-	import('./FilterSection').then(m => ({ default: m.FilterSection }))
-)
+const DetailsBoxWrapper = lazy(async () => import('../DetailsWrapper/DetailsBoxWrapper'))
+const FilterSection = lazy(async () => import('./FilterSection').then(m => ({ default: m.FilterSection })))
 const FilterContainer = lazy(async () =>
 	import('./FilterContainer/FilterContainer').then(m => ({
 		default: m.FilterContainer
@@ -85,19 +81,12 @@ export function ListWrapper({
 
 	return (
 		<>
-			<PageTitle
-				title={title}
-				optionalText={!loading && `${total} resultados`}
-			/>
+			<PageTitle title={title} optionalText={!loading && `${total} resultados`} />
 			<DetailsWrapper borderColor="blue">
 				<DetailsBoxWrapper>
 					<FilterSection>
 						{mainFilter}
-						{otherFilter ? (
-							<FilterContainer ref={filterContainerRef}>
-								{otherFilter}
-							</FilterContainer>
-						) : null}
+						{otherFilter ? <FilterContainer ref={filterContainerRef}>{otherFilter}</FilterContainer> : null}
 					</FilterSection>
 					<ButtonSection
 						handleExportToExcel={download}
@@ -113,10 +102,7 @@ export function ListWrapper({
 				<div className="w-full flex flex-col justify-start">
 					{typeOfSiteId !== undefined ? (
 						// <Suspense fallback={<div className='min-h-7 h-7' />}>
-						<TypeOfSiteTabNav
-							onChange={handleChange}
-							value={typeOfSiteId}
-						/>
+						<TypeOfSiteTabNav onChange={handleChange} value={typeOfSiteId} />
 					) : // </Suspense>
 					null}
 
